@@ -88,12 +88,7 @@ app.get("/detail", function(req, res) {
 
 app.post('/procesar-pago', (req, res) => {
 
-  console.log(req);
-  console.log(global.asd)
-  console.log(req.query);
-  const { preference_id } = req.query;
-
-  fetch('https://api.mercadopago.com/merchant_orders/search?access_token='+process.env.ACCESS_TOKEN+'&preference_id='+preference_id)
+  fetch('https://api.mercadopago.com/merchant_orders/search?access_token='+process.env.ACCESS_TOKEN+'&preference_id='+global.asd)
     .then(res => res.json())
     .then(json => {
 
