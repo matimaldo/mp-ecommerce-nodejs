@@ -102,7 +102,7 @@ app.get('/pending', function (req, res) {
 });
 
 app.get('/success', function (req, res) {
-    var id = req.body.data.id
+    var id = req.body.collection_id
     mercadopago.payment.get(id).then(function (data) {
       console.log("Maldo-Data-1")
       console.log(data)
