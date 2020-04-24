@@ -84,8 +84,8 @@ app.get("/detail", function(req, res) {
 });
 
 app.post('/procesar-pago', (req, res) => {
-  console.log("Maldo-Data-4")
-  onsole.log(req);  
+  console.log("Maldo-Data-procesar-pago")
+  console.log(req);  
   res.render('home')
 })
 
@@ -102,6 +102,8 @@ app.get('/pending', function (req, res) {
 });
 
 app.get('/success', function (req, res) {
+    console.log("Maldo-Data-success")
+    console.log(req)
     var id = req.body.collection_id
     mercadopago.payment.get(id).then(function (data) {
       console.log("Maldo-Data-1")
