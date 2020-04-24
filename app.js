@@ -65,7 +65,12 @@ app.get("/detail", function(req, res) {
      },
     external_reference: "ABCD1234",
     notification_url: req.protocol + '://' + req.get('host') + '/notifications',
-    auto_return:"approved"
+    auto_return:"approved",
+    redirect_urls: {
+      "success": req.protocol + '://' + req.get('host') + '/success',
+      "pending": req.protocol + '://' + req.get('host') + '/pending',
+      "failure": req.protocol + '://' + req.get('host') + '/failure'
+    }
   };
 
   mercadopago.preferences.create(preference)
@@ -88,8 +93,8 @@ app.post('/procesar-pago', (req, res) => {
   console.log(req);  
   console.log("Maldo-Data-procesar-pago-query")
   console.log(req.query);  
-  console.log("Maldo-Data-procesar-pago-data")
-  console.log(req.data); 
+  console.log("Maldo-Data-procesar-pago-body")
+  console.log(req.body); 
   res.render('home')
 })
 
