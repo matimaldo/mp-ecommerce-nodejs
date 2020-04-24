@@ -84,7 +84,7 @@ app.get("/detail", function(req, res) {
 });
 
 app.post('/procesar-pago', (req, res) => {
-    // res.render('home')
+    res.render('home')
 })
 
 app.get('/', function (req, res) {
@@ -107,7 +107,7 @@ app.get('/approved', function (req, res) {
 app.post('/notifications', async(req, res)=>{
   
     const body = req.body;
-    console.log(body);
+    console.log(req);
     res.status(200).json('OK')
 })
 
