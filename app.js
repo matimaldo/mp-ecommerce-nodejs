@@ -99,15 +99,29 @@ app.get('/pending', function (req, res) {
 
   res.render('pending');
 });
-app.get('/approved', function (req, res) {
+app.get('/success', function (req, res) {
     console.log(req);
-  res.render('approved');
+    console.log(req);
+    var id = req.body.data.id
+    mercadopago.payment.get(id).then(function (data) {
+      console.log(data.body)
+      var payment_method_id = data.body.payment_method_id
+      var transaction_amount = data.body.transaction_amount
+      var order_id = data.body.order.id
+      res.render('success', {
+        id,
+        payment_method_id,
+        transaction_amount,
+        order_id
+      });
+    })
+
 });
 
 app.post('/notifications', async(req, res)=>{
   
     const body = req.body;
-    console.log(req);
+    console.log(req.query);
     res.status(200).json('OK')
 })
 
