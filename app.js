@@ -98,8 +98,19 @@ app.post('/procesar-pago', (req, res) => {
         case 'pending':
           res.render("pending");
           break;
-        case 'succcess':
-          res.render("home");
+        case 'approved':
+          var id = json.elements[0].payments[0].id
+          mercadopago.payment.get(id).then(function (data) {
+            var payment_method_id = data.body.payment_method_id
+            var transaction_amount = data.body.transaction_amount
+            var order_id = data.body.order.id
+            res.render('success', {
+              id,
+              payment_method_id,
+              transaction_amount,
+              order_id
+            });
+          })
           break;
         case 'failure':
           res.render("failure");
