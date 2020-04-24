@@ -93,12 +93,13 @@ app.post('/procesar-pago', (req, res) => {
     .then(json => {
 
       let status = json.elements[0].payments[0].status;
+      console.log(status);
       switch(status) {
         case 'pending':
           res.render("pending");
           break;
         case 'succcess':
-          res.render("detail");
+          res.render("home");
           break;
         case 'failure':
           res.render("failure");
