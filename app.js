@@ -43,7 +43,7 @@ app.get("/detail", function(req, res) {
             "type" : "DNI",
             "number" : "22333444"
         },
-        "email" : "test_user_63274575@testuser.com",
+        "email" : "test_user_1794068@testuser.com",
         "phone": {
             "area_code": "011",
             "number": 22223333
@@ -67,9 +67,11 @@ app.get("/detail", function(req, res) {
     notification_url: req.protocol + '://' + req.get('host') + '/notifications',
     auto_return:"approved"
   };
+  console.log(preference);
   mercadopago.preferences.create(preference)
     .then(resp => {
       global.init_point = resp.body.init_point;
+      console.log(global.init_point);
       res.render("detail", {
         img,
         price,
@@ -82,7 +84,7 @@ app.get("/detail", function(req, res) {
 });
 
 app.post('/procesar-pago', (req, res) => {
-    res.render('home')
+    // res.render('home')
 })
 
 app.get('/', function (req, res) {
@@ -105,6 +107,7 @@ app.get('/approved', function (req, res) {
 app.post('/notifications', async(req, res)=>{
   
     const body = req.body;
+    console.log(body);
     res.status(200).json('OK')
 })
 
