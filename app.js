@@ -5,6 +5,7 @@ const mercadopago = require("mercadopago");
 const fetch = require('node-fetch');
 
 var app = express();
+global.asd = 'Hola'
 
 dotenv.config();
 
@@ -73,6 +74,7 @@ app.get("/detail", function(req, res) {
     .then(resp => {
       global.init_point = resp.body.init_point;
       console.log(global.init_point);
+      global.asd = resp.body.id;
       res.render("detail", {
         img,
         price,
@@ -87,6 +89,7 @@ app.get("/detail", function(req, res) {
 app.post('/procesar-pago', (req, res) => {
 
   console.log(req);
+  console.log(global.asd)
   console.log(req.query);
   const { preference_id } = req.query;
 
