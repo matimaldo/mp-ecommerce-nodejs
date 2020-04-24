@@ -67,7 +67,7 @@ app.get("/detail", function(req, res) {
     notification_url: req.protocol + '://' + req.get('host') + '/notifications',
     auto_return:"approved"
   };
-  console.log(preference);
+
   mercadopago.preferences.create(preference)
     .then(resp => {
       global.init_point = resp.body.init_point;
@@ -86,6 +86,10 @@ app.get("/detail", function(req, res) {
 app.post('/procesar-pago', (req, res) => {
   console.log("Maldo-Data-procesar-pago")
   console.log(req);  
+  console.log("Maldo-Data-procesar-pago-query")
+  console.log(req.query);  
+  console.log("Maldo-Data-procesar-pago-data")
+  console.log(req.data); 
   res.render('home')
 })
 
@@ -102,16 +106,8 @@ app.get('/pending', function (req, res) {
 });
 
 app.get('/success', function (req, res) {
-    console.log("Maldo-Data-success")
-    console.log(req)
     var id = req.query.collection_id
     mercadopago.payment.get(id).then(function (data) {
-      console.log("Maldo-Data")
-      console.log(data)
-      console.log("Maldo-Data-Body")
-      console.log(data.body)
-      console.log("Maldo-Data-Query")
-      console.log(data.body.query)
       var payment_method_id = data.body.payment_method_id
       var transaction_amount = data.body.transaction_amount
       var order_id = data.body.order.id
