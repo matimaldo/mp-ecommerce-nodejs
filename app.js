@@ -2,6 +2,7 @@ var dotenv = require('dotenv');
 var express = require("express");
 var exphbs = require("express-handlebars");
 const mercadopago = require("mercadopago");
+const fetch = require('node-fetch');
 
 var app = express();
 
@@ -84,13 +85,27 @@ app.get("/detail", function(req, res) {
 });
 
 app.post('/procesar-pago', (req, res) => {
-  // console.log("Maldo-Data-procesar-pago")
-  // console.log(req);  
-  // console.log("Maldo-Data-procesar-pago-query")
-  // console.log(req.query);  
-  // console.log("Maldo-Data-procesar-pago-body")
-  // console.log(req.body); 
-  res.render('home')
+  const { preference_id} = req.query;
+
+  fetch('https://api.mercadopago.com/merchant_orders/search?access_token='+process.env.ACCESS_TOKEN+'&preference_id='+preference_id)
+    .then(res => res.json())
+    .then(json => {
+
+      let status = json.elements[0].payments[0].status;
+      switch(status) {
+        case 'pending':
+          res.render("pending");
+          break;
+        case 'succcess':
+          res.render("detail");
+          break;
+        case 'failure':
+          res.render("failure");
+          break;
+        default:
+          res.status(500).json('Error-Guardado')
+      }
+    });
 })
 
 app.get('/', function (req, res) {
