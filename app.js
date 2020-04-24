@@ -43,7 +43,7 @@ app.get("/detail", function(req, res) {
             "type" : "DNI",
             "number" : "22333444"
         },
-        "email" : "test_user_1794068@testuser.com",
+        "email" : "test_user_63274575@testuser.com",
         "phone": {
             "area_code": "011",
             "number": 22223333
@@ -84,12 +84,12 @@ app.get("/detail", function(req, res) {
 });
 
 app.post('/procesar-pago', (req, res) => {
-  console.log("Maldo-Data-procesar-pago")
-  console.log(req);  
-  console.log("Maldo-Data-procesar-pago-query")
-  console.log(req.query);  
-  console.log("Maldo-Data-procesar-pago-body")
-  console.log(req.body); 
+  // console.log("Maldo-Data-procesar-pago")
+  // console.log(req);  
+  // console.log("Maldo-Data-procesar-pago-query")
+  // console.log(req.query);  
+  // console.log("Maldo-Data-procesar-pago-body")
+  // console.log(req.body); 
   res.render('home')
 })
 
