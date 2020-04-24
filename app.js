@@ -61,7 +61,7 @@ app.get("/detail", function(req, res) {
         excluded_payment_types: [
           { id: "atm" }
         ],
-       default_installments: 6
+        installments: 6
      },
     external_reference: "ABCD1234",
     notification_url: req.protocol + '://' + req.get('host') + '/notifications',
@@ -84,7 +84,9 @@ app.get("/detail", function(req, res) {
 });
 
 app.post('/procesar-pago', (req, res) => {
-    res.render('home')
+  console.log("Maldo-Data-4")
+  onsole.log(req);  
+  res.render('home')
 })
 
 app.get('/', function (req, res) {
@@ -92,19 +94,22 @@ app.get('/', function (req, res) {
 });
 
 app.get('/failure', function (req, res) {
-
   res.render('failure');
 });
-app.get('/pending', function (req, res) {
 
+app.get('/pending', function (req, res) {
   res.render('pending');
 });
+
 app.get('/success', function (req, res) {
-    console.log(req);
-    console.log(req);
     var id = req.body.data.id
     mercadopago.payment.get(id).then(function (data) {
+      console.log("Maldo-Data-1")
+      console.log(data)
+      console.log("Maldo-Data-1")
       console.log(data.body)
+      console.log("Maldo-Data-1")
+      console.log(data.body.query)
       var payment_method_id = data.body.payment_method_id
       var transaction_amount = data.body.transaction_amount
       var order_id = data.body.order.id
@@ -121,6 +126,7 @@ app.get('/success', function (req, res) {
 app.post('/notifications', async(req, res)=>{
   
     const body = req.body;
+    console.log("Maldo-Data-notifications")
     console.log(req.query);
     res.status(200).json('OK')
 })
