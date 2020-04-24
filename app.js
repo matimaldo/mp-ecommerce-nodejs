@@ -65,12 +65,7 @@ app.get("/detail", function(req, res) {
      },
     external_reference: "ABCD1234",
     notification_url: req.protocol + '://' + req.get('host') + '/notifications',
-    auto_return:"approved",
-    redirect_urls: {
-      "success": req.protocol + '://' + req.get('host') + '/success',
-      "pending": req.protocol + '://' + req.get('host') + '/pending',
-      "failure": req.protocol + '://' + req.get('host') + '/failure'
-    }
+    auto_return:"approved"
   };
 
   mercadopago.preferences.create(preference)
